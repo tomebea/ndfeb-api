@@ -20142,8 +20142,9 @@ var supabase = createClient(supabaseUrl, supabaseKey, {
   realtime: { enabled: false }, // 关键：彻底禁用 Realtime，避免 WebSocket 问题
 });
     webSocketImpl: ws,
-  },
 });
+
+// api/routes/quote.ts
 
 // api/routes/quote.ts
 var quoteRouter = router({
