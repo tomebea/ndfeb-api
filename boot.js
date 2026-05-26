@@ -20141,8 +20141,6 @@ var supabase = createClient(supabaseUrl, supabaseKey, {
   auth: { autoRefreshToken: false, persistSession: false },
   realtime: { enabled: false }, // 关键：彻底禁用 Realtime，避免 WebSocket 问题
 });
-    webSocketImpl: ws,
-});
 
 // api/routes/quote.ts
 
