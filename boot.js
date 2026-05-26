@@ -1,4 +1,10 @@
 import ws from 'ws';
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection:', reason);
+});
 import { createRequire } from 'module';const require = createRequire(import.meta.url);
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
@@ -20133,7 +20139,8 @@ if (!supabaseUrl || !supabaseKey) {
 }
 var supabase = createClient(supabaseUrl, supabaseKey, {
   auth: { autoRefreshToken: false, persistSession: false },
-  realtime: {
+  realtime: { enabled: false }, // 关键：彻底禁用 Realtime，避免 WebSocket 问题
+});
     webSocketImpl: ws,
   },
 });
