@@ -20139,8 +20139,9 @@ if (!supabaseUrl || !supabaseKey) {
 }
 var supabase = createClient(supabaseUrl, supabaseKey, {
   auth: { autoRefreshToken: false, persistSession: false },
-  realtime: { enabled: false }
+  realtime: { enabled: false },
 });
+
 // api/routes/quote.ts
 var quoteRouter = router({
   list: publicProcedure.query(async () => {
@@ -20430,11 +20431,6 @@ function createContext(opts) {
 }
 
 // api/boot.ts
-import { join, dirname } from "path";
-import { readFileSync, existsSync } from "fs";
-import { fileURLToPath } from "url";
-var __filename = fileURLToPath(import.meta.url);
-var __dirname = dirname(__filename);
 var app = new Hono2();
 app.use("*", cors({ origin: "*" }));
 app.use("/api/trpc/*", async (c) => {
@@ -20446,33 +20442,6 @@ app.use("/api/trpc/*", async (c) => {
   });
 });
 app.get("/health", (c) => c.json({ status: "ok" }));
-var publicDir = join(process.cwd(), "public");
-var mimeTypes = {
-  html: "text/html",
-  js: "application/javascript",
-  css: "text/css",
-  json: "application/json",
-  png: "image/png",
-  jpg: "image/jpeg",
-  jpeg: "image/jpeg",
-  gif: "image/gif",
-  svg: "image/svg+xml",
-  ico: "image/x-icon",
-  woff2: "font/woff2",
-  woff: "font/woff"
-};
-app.use("/*", async (c, next) => {
-  const url2 = new URL(c.req.url);
-  if (url2.pathname.startsWith("/api/")) return next();
-  const filePath = join(publicDir, url2.pathname === "/" ? "index.html" : url2.pathname);
-  if (existsSync(filePath)) {
-    const content = readFileSync(filePath);
-    const ext = filePath.split(".").pop() || "";
-    return new Response(content, { headers: { "content-type": mimeTypes[ext] || "application/octet-stream" } });
-  }
-  const indexPath = join(publicDir, "index.html");
-  return new Response(readFileSync(indexPath), { headers: { "content-type": "text/html" } });
-});
 var boot_default = app;
 export {
   boot_default as default
