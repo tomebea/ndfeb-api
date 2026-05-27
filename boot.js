@@ -1,11 +1,4 @@
-import ws from 'ws';
-process.on('uncaughtException', (err) => {
-  console.error('Uncaught Exception:', err);
-});
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection:', reason);
-});
-import { createRequire } from 'module';const require = createRequire(import.meta.url);
+import { createRequire } from 'module';const require = createRequire(import.meta.url);,
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
   for (var name in all)
@@ -20138,11 +20131,8 @@ if (!supabaseUrl || !supabaseKey) {
   console.warn("WARNING: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_ANON_KEY) must be set. API calls will fail.");
 }
 var supabase = createClient(supabaseUrl, supabaseKey, {
-  auth: { autoRefreshToken: false, persistSession: false },
-  realtime: { enabled: false }, // 关键：彻底禁用 Realtime，避免 WebSocket 问题
+  auth: { autoRefreshToken: false, persistSession: false }
 });
-
-// api/routes/quote.ts
 
 // api/routes/quote.ts
 var quoteRouter = router({
@@ -20300,7 +20290,36 @@ var salesLockRouter = router({
     if (error51) throw new Error(error51.message);
     return data || [];
   }),
-  create: publicProcedure.input(external_exports.object({ batchNo: external_exports.string(), quoteId: external_exports.string().optional(), division: external_exports.string().optional(), customerName: external_exports.string().optional(), materialType: external_exports.string().optional(), netWeight: external_exports.number().optional(), elementPurchasePrices: external_exports.record(external_exports.string(), external_exports.number()).optional(), elementSalePrices: external_exports.record(external_exports.string(), external_exports.number()).optional(), profitPerTonPrNd: external_exports.number().optional(), unitCost: external_exports.number().optional(), lockPrice: external_exports.number().optional(), totalAmount: external_exports.number().optional(), grossProfit: external_exports.number().optional(), profitMargin: external_exports.number().optional(), lockedBy: external_exports.string().optional(), lockedAt: external_exports.string().optional() })).mutation(async ({ input }) => {
+  create: publicProcedure.input(external_exports.object({
+    batchNo: external_exports.string(),
+    quoteId: external_exports.string().optional(),
+    division: external_exports.string().optional(),
+    customerName: external_exports.string().optional(),
+    materialType: external_exports.string().optional(),
+    totalValuableWeight: external_exports.number().optional(),
+    remainingWeight: external_exports.number().optional(),
+    soldWeight: external_exports.number().optional(),
+    elementPurchasePrices: external_exports.record(external_exports.string(), external_exports.number()).optional(),
+    elementSalePrices: external_exports.record(external_exports.string(), external_exports.number()).optional(),
+    profitPerTonPrNd: external_exports.number().optional(),
+    saleRecords: external_exports.array(external_exports.object({
+      id: external_exports.string(),
+      saleWeight: external_exports.number(),
+      saleProfitPerTonPrNd: external_exports.number(),
+      saleTotalProfit: external_exports.number(),
+      saleDate: external_exports.string(),
+      soldBy: external_exports.string(),
+      note: external_exports.string().optional()
+    })).optional(),
+    lockedBy: external_exports.string().optional(),
+    lockedAt: external_exports.string().optional(),
+    status: external_exports.string().optional(),
+    unitCost: external_exports.number().optional(),
+    lockPrice: external_exports.number().optional(),
+    totalAmount: external_exports.number().optional(),
+    grossProfit: external_exports.number().optional(),
+    profitMargin: external_exports.number().optional()
+  })).mutation(async ({ input }) => {
     const { error: error51 } = await supabase.from("sales_locks").insert(input);
     if (error51) throw new Error(error51.message);
     return { success: true };
