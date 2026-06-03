@@ -1,18 +1,1 @@
-{
-  "name": "ndfeb-recycling-system",
-  "version": "2.0.0",
-  "description": "钕铁硼废料回收智能系统 - Supabase PostgreSQL 版",
-  "type": "module",
-  "scripts": {
-    "start": "node server.mjs"
-  },
-  "dependencies": {
-    "@hono/node-server": "^1.13.7",
-    "@supabase/supabase-js": "^2.49.1",
-    "@trpc/server": "^11.17.0",
-    "hono": "^4.12.21",
-    "superjson": "^2.2.6",
-    "ws": "^8.18.0",
-    "zod": "^4.4.3"
-  }
-}
+{"name":"ndfeb-api","version":"3.1.0","type":"module","scripts":{"start":"node server.mjs"},"dependencies":{"@supabase/supabase-js":"^2.49.0","@trpc/server":"^11.17.0","hono":"^4.12.21","superjson":"^2.2.6","zod":"^4.4.3"},"engines":{"node":">=18.0.0"}}

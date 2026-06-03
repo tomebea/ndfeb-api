@@ -1,11 +1,4 @@
-import ws from 'ws';
-process.on('uncaughtException', (err) => {
-  console.error('Uncaught Exception:', err);
-});
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection:', reason);
-});
-import { createRequire } from 'module';const require = createRequire(import.meta.url);
+import { createRequire } from 'module';const require = createRequire(import.meta.url);,
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
   for (var name in all)
@@ -20138,8 +20131,7 @@ if (!supabaseUrl || !supabaseKey) {
   console.warn("WARNING: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_ANON_KEY) must be set. API calls will fail.");
 }
 var supabase = createClient(supabaseUrl, supabaseKey, {
-  auth: { autoRefreshToken: false, persistSession: false },
-  realtime: { enabled: false },
+  auth: { autoRefreshToken: false, persistSession: false }
 });
 
 // api/routes/quote.ts
