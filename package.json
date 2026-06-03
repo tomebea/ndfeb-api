@@ -1,14 +1,20 @@
-{"name":"ndfeb-api","version":"3.1.0","type":"module","scripts":{"start":"node server.mjs"},"dependencies":{"@supabase/supabase-js":"^2.49.0","@trpc/server":"^11.17.0","hono":"^4.12.21","superjson":"^2.2.6","zod":"^4.4.3"},"engines":{"node":">=18.0.0"}}
 {
   "name": "ndfeb-api",
-  "version": "1.0.0",
+  "version": "3.1.0",
   "type": "module",
   "scripts": {
     "start": "node dist/server.js"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
-    "@supabase/supabase-js": "^2.49.1",
-    "ws": "^8.18.0"
+    "@supabase/supabase-js": "^2.49.0",
+    "@trpc/server": "^11.17.0",
+    "hono": "^4.12.21",
+    "superjson": "^2.2.6",
+    "ws": "^8.18.0",
+    "zod": "^4.4.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
