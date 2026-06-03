@@ -20133,7 +20133,9 @@ if (!supabaseUrl || !supabaseKey) {
 }
 var supabase = createClient(supabaseUrl, supabaseKey, {
   auth: { autoRefreshToken: false, persistSession: false },
-  realtime: { enabled: false }
+  realtime: {
+    webSocketImpl: ws, 
+  },
 });
 
 // api/routes/quote.ts
